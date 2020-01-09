@@ -69,6 +69,9 @@ public final class SqlSessionUtils {
   }
 
   /**
+   * 查询SqlSession
+   */
+  /**
    * Gets an SqlSession from Spring Transaction Manager or creates a new one if needed.
    * Tries to get a SqlSession out of current transaction. If there is not any, it creates a new one.
    * Then, it synchronizes the SqlSession with the transaction if Spring TX is active and

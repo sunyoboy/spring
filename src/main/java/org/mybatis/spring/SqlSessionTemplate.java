@@ -76,10 +76,17 @@ import org.springframework.dao.support.PersistenceExceptionTranslator;
  */
 public class SqlSessionTemplate implements SqlSession, DisposableBean {
 
+  /**
+   * @DefaultSqlSessionFactory
+   */
   private final SqlSessionFactory sqlSessionFactory;
 
   private final ExecutorType executorType;
 
+  /**
+   * SqlSession代理
+   * SqlSessionInterceptor
+   */
   private final SqlSession sqlSessionProxy;
 
   private final PersistenceExceptionTranslator exceptionTranslator;
@@ -223,6 +230,7 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
   }
 
   /**
+   * 查询列表
    * {@inheritDoc}
    */
   @Override
@@ -416,6 +424,9 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
   //This method forces spring disposer to avoid call of SqlSessionTemplate.close() which gives UnsupportedOperationException
   }
 
+  /**
+   * SqlSessionProxy实例
+   */
     /**
    * Proxy needed to route MyBatis method calls to the proper SqlSession got
    * from Spring's Transaction Manager
@@ -430,6 +441,9 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
           SqlSessionTemplate.this.executorType,
           SqlSessionTemplate.this.exceptionTranslator);
       try {
+        /**
+         * 执行查询命令
+         */
         Object result = method.invoke(sqlSession, args);
         if (!isSqlSessionTransactional(sqlSession, SqlSessionTemplate.this.sqlSessionFactory)) {
           // force commit even on non-dirty sessions because some databases require

@@ -38,6 +38,9 @@ import org.springframework.transaction.TransactionException;
  */
 public class MyBatisExceptionTranslator implements PersistenceExceptionTranslator {
 
+  /**
+   * 数据源：HikariDataSource(HikariConfig 对应yaml配置)
+   */
   private final DataSource dataSource;
 
   private SQLExceptionTranslator exceptionTranslator;

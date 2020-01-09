@@ -533,6 +533,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
   }
 
   /**
+   * 初始化sqlSessionFactory变量
    * {@inheritDoc}
    */
   @Override
